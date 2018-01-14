@@ -9,8 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARE0iIj2L9WbEiuQ96FyU6ZdTNcJ85FPs&libraries=places"/>
     <!-- Styles -->
+    <script src="{{asset('js/jquery.js')}}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>

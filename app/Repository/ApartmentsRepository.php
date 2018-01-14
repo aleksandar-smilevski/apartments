@@ -20,6 +20,31 @@ class ApartmentsRepository implements IApartmentsRepository
 
     public function getById(int $id)
     {
-        return Apartment::where("id", $id)->get();
+        return Apartment::where("id", $id)->first();
+    }
+
+    public function create(Apartment $apartment)
+    {
+        $apartment = $apartment->save();
+        return $apartment;
+    }
+
+    public function update(Apartment $apartment, $id)
+    {
+        $oldApartment = Apartment::find($id);
+        if($oldApartment == null){
+            return false;
+        }
+
+        $oldApartment->name = $apartment->name;
+        $oldApartment->description = $apartment->description;
+        $oldApartment->longitude = $apartment->longitude;
+        $oldApartment->latitude = $apartment->latitude;
+        return $oldApartment->update();
+    }
+
+    public function delete(int $id)
+    {
+        // TODO: Implement delete() method.
     }
 }
