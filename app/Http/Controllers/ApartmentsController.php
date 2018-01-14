@@ -21,8 +21,10 @@ class ApartmentsController extends Controller
         $this->repository = $apartmentsRepository;
     }
 
-    public function index(){
-        return $this-> repository -> getAll();
+    public function getByLocation(Request $request){
+       dd($request->query('destination'));
+       dd($request->query('from'));
+       dd($request->query('to'));
     }
 
     public function show($id){
