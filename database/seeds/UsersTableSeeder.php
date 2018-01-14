@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                'name' => $faker->name,
                 'email' => $faker->email,
-                'password' => 'password',
+                'password' => bcrypt('password'),
                 'remember_token' => false,
                 'phone' => $faker->phoneNumber
             ]);

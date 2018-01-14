@@ -16,3 +16,7 @@
 Route::get('/',"Controller@index");
 Route::get('/apartments',"ApartmentsController@index");
 Route::get('/apartments/{id}',"ApartmentsController@show");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
