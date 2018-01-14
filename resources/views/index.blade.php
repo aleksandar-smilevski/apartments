@@ -4,27 +4,54 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Index</title>
 
-    {{--<link href="../../public/css/bootstrap.min.css" rel="stylesheet" type="text/css">--}}
+    {{--stylesheets--}}
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/index.css')}}" rel="stylesheet">
 
 
+
+    {{--scripts--}}
     <script src="{{asset('js/jquery.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARE0iIj2L9WbEiuQ96FyU6ZdTNcJ85FPs&libraries=places"/>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARE0iIj2L9WbEiuQ96FyU6ZdTNcJ85FPs&libraries=places&callback=initMap" async defer></script>
+    <script src="{{asset('js/index.js')}}"></script>
 
 </head>
 <body>
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-</nav>
+<div class="wrapper">
+    <div class="landing_image">
+        <div class="form_wrapper">
+            <div class="form_content">
+                <div class="form_title">
+                    <h2>Find the perfect place to stay</h2>
+                </div>
+                <div class="form_body">
+                    <form action="/" method="get">
+                        <div class="form-group">
+                            <label for="location">Pick a destination</label>
+                            <input id="destination" name="destination" class="form-control" type="text" placeholder="Pick a destination...">
+                        </div>
 
-<!-- As a heading -->
-<nav class="navbar navbar-light bg-light">
-    <span class="navbar-brand mb-0 h1">Navbar</span>
-</nav>
+                        <div class="form-group">
+                            <label for="from">Date from: </label>
+                            <input class="form-control" type="text" placeholder="Pick date from...">
+                        </div>
+                        <div class="form-group">
+                            <label for="to">Date to: </label>
+                            <input class="form-control" type="text" placeholder="Pick  date to...">
+                        </div>
+
+                        <input type="submit" class="btn btn-default"  id="search"/>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
