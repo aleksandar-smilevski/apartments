@@ -11,6 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     function index(){
-        return "Hello from the other side!";
+        return "Hello, World!";
     }
 }
