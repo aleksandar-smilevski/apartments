@@ -15,4 +15,6 @@ interface IApartmentsRepository
     public function create(Apartment $apartment);
     public function update(Apartment $apartment, $id);
     public function delete(int $id);
+
+
 }

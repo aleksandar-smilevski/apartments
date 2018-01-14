@@ -47,4 +47,5 @@ class ApartmentsRepository implements IApartmentsRepository
     {
         // TODO: Implement delete() method.
     }
+
 }

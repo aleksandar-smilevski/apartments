@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('App\Repository\Contracts\IApartmentsRepository','App\Repository\ApartmentsRepository');
+        $this->app->bind('App\Repository\Contracts\IReservationsRepository','App\Repository\ReservationsRepository');
     }
 }
