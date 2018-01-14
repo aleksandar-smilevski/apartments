@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/apartments',"ApartmentsController@index");
+Route::get('/apartments/{id}',"ApartmentsController@show");
