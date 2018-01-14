@@ -13,6 +13,6 @@ class Controller extends BaseController
 
 
     function index(){
-        return "Hello, Jona!";
+        return view('index');
     }
 }

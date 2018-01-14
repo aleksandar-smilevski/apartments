@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+Route::get('/',"Controller@index");
 Route::get('/apartments',"ApartmentsController@index");
 Route::get('/apartments/{id}',"ApartmentsController@show");
