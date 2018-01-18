@@ -13,4 +13,6 @@ interface IReservationsRepository
 {
     public function getAll();
     public function getById(int $id);
+    public function getByApartmentId(int $apartment_id);
+    public function getByUserId(int $user_id);
 }

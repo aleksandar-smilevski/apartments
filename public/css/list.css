@@ -1,0 +1,36 @@
+.wrapper {
+    position: absolute;
+    left: 50%;
+    width: 90%;
+    transform: translate(-50%, 0);
+}
+
+.element-wrapper {
+    height: 700px;
+    width: 25%;
+    float: left;
+    margin: auto;
+    padding: 10px;
+}
+
+.element-picture {
+    position: relative;
+}
+.element-picture img {
+    height: 200px;
+}
+
+.element-title {
+    margin-bottom: 100px;
+    height: 100px;
+}
+
+.element-price {
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    top:0;
+    text-align: center;
+    background-color: #ac2925;
+    color:white;
+}

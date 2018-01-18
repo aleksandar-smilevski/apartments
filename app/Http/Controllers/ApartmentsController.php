@@ -22,9 +22,8 @@ class ApartmentsController extends Controller
     }
 
     public function getByLocation(Request $request){
-       dd($request->query('destination'));
-       dd($request->query('from'));
-       dd($request->query('to'));
+        $apartments = $this->repository->getAll();
+       return view('apartments.list')->with('apartments',$apartments);
     }
 
     public function show($id){
