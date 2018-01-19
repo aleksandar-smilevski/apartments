@@ -34,7 +34,7 @@ class ReservationsRepository implements IReservationsRepository
     }
 
     public function getByUserId(int $user_id) {
-        return Reservation::where("user_id" ,$user_id)->first();
+        return Reservation::where("user_id" ,$user_id)->get();
     }
 
     public function getByUserIdAndReservationId(int $user_id,int  $reservation_id) {

@@ -52,4 +52,8 @@ class ApartmentsRepository implements IApartmentsRepository
     }
 
 
+    public function getByUserId(int $user_id)
+    {
+        return Apartment::where("user_id", $user_id)->get();
+    }
 }

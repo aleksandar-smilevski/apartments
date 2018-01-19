@@ -15,6 +15,7 @@ interface IApartmentsRepository
     public function create(Apartment $apartment);
     public function update(Apartment $apartment, $id);
     public function delete(int $id);
+    public function getByUserId(int $user_id);
     public function getAvailableApartmentsFromIdsArray($ids);
 
 }
