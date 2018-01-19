@@ -35,10 +35,9 @@
 
         <div class="user-details">
             <div class="user-reviews">
-                <h3><b>Reviews ({{$reviews->count()}})</b></h3>
-                <h4>Reviews from guests</h4>
+                <h4><b>Reviews ({{$reviews->count()}})</b></h4>
+                <h5>Reviews from {{$user->name}}</h5>
                 <hr>
-                <br>
                 @foreach($reviews as $review)
                     <div class="review-wrapper">
                         <div class="review-body">
@@ -46,8 +45,8 @@
                                 <img src="../../img/app.jpg" alt="">
                             </div>
                             <div class="review-person-detail">
-                                <h4>User: {{$review->user_id}}</h4>
-                                <h4>Review: {{$review->review}}</h4>
+                                <h5><b>Apartment name:</b> <a   href="{{url('apartments/'. $review->apartment_id)}}">{{$review->apartment}}</a></h5>
+                                <h5>Review: {{$review->review}}</h5>
                             </div>
                         </div>
                     </div>

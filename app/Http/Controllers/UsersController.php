@@ -29,6 +29,13 @@ class UsersController extends Controller
     public function show($id) {
         $user = $this ->userRepository->getById($id);
         $reviews = $this -> reviewsRepository->getByUserId($id);
+
+        foreach($reviews as $review){
+            $apartment_review = $this->repository ->getById($review->apartment_id);
+            $review['apartment'] = $apartment_review->name;
+            $review['apartment_id'] = $apartment_review->id;
+        }
+
         $apartments = $this -> repository->getByUserId($id);
         $reservations = $this-> reservationsRepository->getByUserId($id);
 

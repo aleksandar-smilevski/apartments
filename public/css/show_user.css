@@ -53,21 +53,21 @@
 }
 
 .review-person-image {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     float:left;
 }
 
 .review-person-image img{
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 50%;
 }
 
 .review-person-detail {
     float: left;
-    margin-left: 50px;
+    margin-left: 10px;
     width: 500px;
 }
 
