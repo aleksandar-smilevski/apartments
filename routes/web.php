@@ -27,6 +27,10 @@ Route::get('/reservations/{id}',"ReservationsController@show");
 Route::get('/apartments/{apartmentId}/reservations',"ReservationsController@listAllForApartment");
 Route::get('/apartments/{apartmentId}/reservations/{reservationId}',"ReservationsController@showForApartment");
 
+Route::get('/users',"UsersController@index");
+Route::get('/users/{id}',"UsersController@show");
+
+
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

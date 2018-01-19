@@ -7,6 +7,7 @@ use App\Models\Apartment;
 use App\Repository\Contracts\IApartmentsRepository;
 
 use App\Repository\Contracts\IReservationsRepository;
+use App\Repository\Contracts\IUsersRepository;
 use Geocoder\Laravel\Facades\Geocoder;
 use Illuminate\Http\Request;
 
@@ -15,27 +16,37 @@ class ApartmentsController extends Controller
 
     protected $repository;
     protected $reservationsRepository;
+    protected $userRepository;
 
     /**
      * ApartmentsController constructor.
      */
-    public function __construct(IApartmentsRepository $apartmentsRepository, IReservationsRepository $reservationsRepository)
+    public function __construct(IApartmentsRepository $apartmentsRepository, IReservationsRepository $reservationsRepository, IUsersRepository $usersRepository)
     {
         $this->repository = $apartmentsRepository;
+        $this->userRepository = $usersRepository;
         $this->reservationsRepository = $reservationsRepository;
 
     }
 
     public function getByLocation(Request $request){
-        $apartments= $this ->repository->getAll();
+        $allApartments = $this -> repository->getAll();
+        $apartments = [];
         $availableApartmentsIds = [];
-        foreach($apartments as $apartment){
-            $reservations= $this->reservationsRepository -> getAvailableApartmentsForPeriod($apartment->id,$request->from , $request->to);
-            if(count($reservations) > 0){
+        $users = [];
+        foreach($allApartments as $apartment){
+            $reservations= $this -> reservationsRepository -> getAvailableApartmentsForPeriod($apartment->id, $request->from , $request->to);
+            if(count($reservations) == 0){
                 array_push($availableApartmentsIds, $apartment->id);
+                array_push($users, $apartment->user_id);
             }
         }
-        return view('apartments.list')->with('apartments',$this->repository->getAvailableApartmentsFromIdsArray($availableApartmentsIds));
+        $apartmentObjects = $this->repository -> getAvailableApartmentsFromIdsArray($availableApartmentsIds);
+        foreach($apartmentObjects as $apartment){
+            $apartment["username"] = $this->userRepository->getById($apartment->user_id)->name;
+        }
+
+        return view('apartments.list')->with('apartments', $apartmentObjects);
     }
 
     public function show($id){

@@ -5,16 +5,13 @@
     @foreach($apartments as $apartment)
         <div class="element-wrapper">
             <div class="element-title">
-                <h4>{{$apartment -> name }}</h4>
-                <h5>Appartment owner: {{$apartment -> user_id}}</h5>
+                <h4><a   href="{{url('apartments/'. $apartment->id)}}">{{$apartment -> name }}</a></h4>
+                <h5>Owner:  <a   href="{{url('users/'. $apartment->user_id)}}">{{$apartment -> username}}</a></h5>
             </div>
             <div class="element-body">
                 <div class="element-picture">
                     <div class="element-price"> {{$apartment -> price}}$ </div>
                     <img src="../../img/app.jpg" alt="">
-                </div>
-                <div class="element-description">
-                    <h5>{{$apartment -> description}}</h5>
                 </div>
             </div>
         </div>
