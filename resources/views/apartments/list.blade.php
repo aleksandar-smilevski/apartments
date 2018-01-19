@@ -11,7 +11,7 @@
             <div class="element-body">
                 <div class="element-picture">
                     <div class="element-price"> {{$apartment -> price}}$ </div>
-                    <img src="../../img/app.jpg" alt="">
+                    <a   href="{{url('users/'. $apartment->user_id)}}"> <img src="../../img/app.jpg" alt=""></a>
                 </div>
             </div>
         </div>

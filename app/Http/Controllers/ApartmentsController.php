@@ -50,7 +50,9 @@ class ApartmentsController extends Controller
     }
 
     public function show($id){
-        return $this-> repository -> getById($id);
+        $apartment = $this->repository ->getById($id);
+        $user = $this -> userRepository -> getById($apartment -> user_id);
+        return view('apartments.show')->with('apartment', $apartment)->with('user',$user);
     }
 
     public function save(){

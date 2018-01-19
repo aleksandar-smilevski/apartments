@@ -1,0 +1,21 @@
+.navbar {
+    margin-bottom: 0!important;
+}
+
+.apartment-landing-image {
+    width: 100%;
+    height: 450px;
+}
+
+.apartment-landing-image img{
+    width:100%;
+    height:450px;
+    object-fit: cover;
+}
+
+.apartment-wrapper {
+
+    width: 80%;
+    margin: auto;
+}
+

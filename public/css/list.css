@@ -20,6 +20,11 @@
     height: 200px;
 }
 
+.element-picture img:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
 .element-title {
     height: 80px;
 }
