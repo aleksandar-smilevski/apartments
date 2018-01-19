@@ -5,7 +5,8 @@
     @foreach($apartments as $apartment)
         <div class="element-wrapper">
             <div class="element-title">
-                <h2>{{$apartment -> name }}</h2>
+                <h3>{{$apartment -> name }}</h3>
+                <h5>Appartment owner: {{$apartment -> user_id}}</h5>
                 <h5>Location: {{$apartment -> longitude}}, {{$apartment -> latitude}}</h5>
             </div>
             <div class="element-body">
