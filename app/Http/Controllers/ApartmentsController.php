@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Apartment;
 use App\Repository\Contracts\IApartmentsRepository;
 
+use App\Repository\Contracts\IReservationsRepository;
 use Geocoder\Laravel\Facades\Geocoder;
 use Illuminate\Http\Request;
 
@@ -13,17 +14,27 @@ class ApartmentsController extends Controller
 {
 
     protected $repository;
+    protected $reservationsRepository;
     /**
      * ApartmentsController constructor.
      */
-    public function __construct(IApartmentsRepository $apartmentsRepository)
+    public function __construct(IApartmentsRepository $apartmentsRepository, IReservationsRepository $reservationsRepository)
     {
         $this->repository = $apartmentsRepository;
+        $this->reservationsRepository = $reservationsRepository;
     }
 
     public function getByLocation(Request $request){
-        $apartments = $this->repository->getAll();
-       return view('apartments.list')->with('apartments',$apartments);
+        $apartments= $this ->repository->getAll();
+        $availableApartmentsIds = [];
+        foreach($apartments as $apartment){
+            $reservations= $this->reservationsRepository -> getAvailableApartmentsForPeriod($apartment->id,$request->from , $request->to);
+            if(count($reservations) > 0){
+                array_push($availableApartmentsIds, $apartment->id);
+            }
+        }
+
+        return view('apartments.list')->with('apartments',$this->repository->getAvailableApartmentsFromIdsArray($availableApartmentsIds));
     }
 
     public function show($id){

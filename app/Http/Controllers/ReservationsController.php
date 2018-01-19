@@ -22,4 +22,13 @@ class ReservationsController extends Controller
     public function show($id){
         return  $this -> repository->getById($id);
     }
+
+    public function listAllForApartment($apartmentId){
+        return $this -> repository-> getByApartmentId($apartmentId);
+    }
+
+    public function showForApartment( $apartmentId, $reservationId){
+
+        return $this -> repository->getByApartmentIdAndReservationId($apartmentId, $reservationId);
+    }
 }

@@ -26,11 +26,23 @@ class ReservationsRepository implements IReservationsRepository
     }
 
     public function getByApartmentId(int $apartment_id) {
-        return Reservation::where("apartment_id", $apartment_id)->first();
+        return Reservation::where("apartment_id", $apartment_id)->get();
+    }
+
+    public function getByApartmentIdAndReservationId(int $apartment_id,int  $reservation_id) {
+        return Reservation::where("apartment_id", $apartment_id) -> where("id", $reservation_id) -> first();
     }
 
     public function getByUserId(int $user_id) {
         return Reservation::where("user_id" ,$user_id)->first();
+    }
+
+    public function getByUserIdAndReservationId(int $user_id,int  $reservation_id) {
+        return Reservation::where("user_id" , $user_id) -> where("id", $reservation_id) -> first();
+    }
+
+    public function getAvailableApartmentsForPeriod($id, $from, $to) {
+        return  Reservation::where('apartment_id',$id)->where("from","<=", $from)->select('apartment_id')->distinct()->get()->toArray();
     }
 
 }
