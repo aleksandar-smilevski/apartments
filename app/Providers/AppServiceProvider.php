@@ -25,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Repository\Contracts\IApartmentsRepository','App\Repository\ApartmentsRepository');
         $this->app->bind('App\Repository\Contracts\IReservationsRepository','App\Repository\ReservationsRepository');
+        $this->app->bind('App\Repository\Contracts\IUsersRepository','App\Repository\UsersRepository');
     }
 }

@@ -5,9 +5,8 @@
     @foreach($apartments as $apartment)
         <div class="element-wrapper">
             <div class="element-title">
-                <h3>{{$apartment -> name }}</h3>
+                <h4>{{$apartment -> name }}</h4>
                 <h5>Appartment owner: {{$apartment -> user_id}}</h5>
-                <h5>Location: {{$apartment -> longitude}}, {{$apartment -> latitude}}</h5>
             </div>
             <div class="element-body">
                 <div class="element-picture">
@@ -15,10 +14,24 @@
                     <img src="../../img/app.jpg" alt="">
                 </div>
                 <div class="element-description">
-                    <h3>{{$apartment -> description}}</h3>
+                    <h5>{{$apartment -> description}}</h5>
                 </div>
             </div>
         </div>
     @endforeach
 </div>
+<div id="map"></div>
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARE0iIj2L9WbEiuQ96FyU6ZdTNcJ85FPs"></script>
+<script>
+    $(document).ready(function(){
+        var map;
+        var latlng = new google.maps.LatLng(42.009572,21.417419);
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: latlng,
+            zoom: 12
+        });
+    })
+</script>
+

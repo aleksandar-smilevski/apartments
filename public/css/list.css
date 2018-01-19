@@ -1,16 +1,16 @@
 .wrapper {
-    position: absolute;
-    left: 50%;
-    width: 90%;
-    transform: translate(-50%, 0);
+    width: 65%;
+    float:left;
+
 }
 
 .element-wrapper {
-    height: 600px;
-    width: 25%;
+    height: 400px;
+    width: 30%;
     float: left;
-    margin: auto;
+    margin: 10px;
     padding: 10px;
+
 }
 
 .element-picture {
@@ -21,7 +21,7 @@
 }
 
 .element-title {
-    margin-bottom: 100px;
+
     height: 80px;
 }
 
@@ -33,4 +33,10 @@
     text-align: center;
     background-color: #ac2925;
     color:white;
+}
+
+#map {
+    height: 700px;
+    width: 35%;
+    float:right;
 }

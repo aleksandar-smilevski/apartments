@@ -15,6 +15,7 @@ class ApartmentsController extends Controller
 
     protected $repository;
     protected $reservationsRepository;
+
     /**
      * ApartmentsController constructor.
      */
@@ -22,6 +23,7 @@ class ApartmentsController extends Controller
     {
         $this->repository = $apartmentsRepository;
         $this->reservationsRepository = $reservationsRepository;
+
     }
 
     public function getByLocation(Request $request){
@@ -33,7 +35,6 @@ class ApartmentsController extends Controller
                 array_push($availableApartmentsIds, $apartment->id);
             }
         }
-
         return view('apartments.list')->with('apartments',$this->repository->getAvailableApartmentsFromIdsArray($availableApartmentsIds));
     }
 
