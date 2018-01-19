@@ -7,6 +7,7 @@ use App\Models\Apartment;
 use App\Repository\Contracts\IApartmentsRepository;
 
 use App\Repository\Contracts\IReservationsRepository;
+use App\Repository\Contracts\IReviewsRepository;
 use App\Repository\Contracts\IUsersRepository;
 use Geocoder\Laravel\Facades\Geocoder;
 use Illuminate\Http\Request;
@@ -17,15 +18,17 @@ class ApartmentsController extends Controller
     protected $repository;
     protected $reservationsRepository;
     protected $userRepository;
+    protected $reviewsRepository;
 
     /**
      * ApartmentsController constructor.
      */
-    public function __construct(IApartmentsRepository $apartmentsRepository, IReservationsRepository $reservationsRepository, IUsersRepository $usersRepository)
+    public function __construct(IApartmentsRepository $apartmentsRepository, IReservationsRepository $reservationsRepository,IReviewsRepository $reviewsRepository, IUsersRepository $usersRepository)
     {
         $this->repository = $apartmentsRepository;
         $this->userRepository = $usersRepository;
         $this->reservationsRepository = $reservationsRepository;
+        $this->reviewsRepository = $reviewsRepository;
 
     }
 
@@ -52,7 +55,14 @@ class ApartmentsController extends Controller
     public function show($id){
         $apartment = $this->repository ->getById($id);
         $user = $this -> userRepository -> getById($apartment -> user_id);
-        return view('apartments.show')->with('apartment', $apartment)->with('user',$user);
+        $reviews = $this -> reviewsRepository -> getByApartmentId($apartment -> id);
+
+        foreach ($reviews as $review){
+            $helperUser = $this->userRepository->getById($review -> user_id);
+            $review['username'] = $helperUser-> name;
+        }
+
+        return view('apartments.show')->with('apartment', $apartment)->with('user',$user)->with('reviews',$reviews);
     }
 
     public function save(){

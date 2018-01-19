@@ -22,7 +22,13 @@
 
                <a   href="{{url('apartments/'. $apartment->id . '/reservations')}}"> <button class="btn-primary btn">Make a reservation</button></a>
            </div>
+           <div class="apartment-reviews">
+               <h3>Reviews</h3>
+               @foreach($reviews as $review)
+                   <h4>{{$review -> username}}</h4>
+                   <h5>{{$review->review}}</h5>
+               @endforeach
+           </div>
        </div>
-
    </div>
 @endsection
