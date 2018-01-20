@@ -40,6 +40,9 @@ class ApartmentsRepository implements IApartmentsRepository
         $oldApartment->description = $apartment->description;
         $oldApartment->longitude = $apartment->longitude;
         $oldApartment->latitude = $apartment->latitude;
+        $oldApartment->address = $apartment->address;
+        $oldApartment->price = $apartment->price;
+        $oldApartment->user_id = $apartment->user_id;
         return $oldApartment->update();
     }
 

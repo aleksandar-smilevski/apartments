@@ -11,6 +11,7 @@ use App\Repository\Contracts\IReviewsRepository;
 use App\Repository\Contracts\IUsersRepository;
 use Geocoder\Laravel\Facades\Geocoder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentsController extends Controller
 {
@@ -52,6 +53,17 @@ class ApartmentsController extends Controller
         return view('apartments.list')->with('apartments', $apartmentObjects);
     }
 
+    public function geocode(Request $request){
+        if($request->input('address') == null){
+            return response()->json([], 500);
+        }
+        $location = Geocoder::geocode($request->input('address'))->get();
+        if($location == null){
+            return response()->json([], 404);
+        }
+        return $location->first()->toArray();
+    }
+
     public function show($id){
         $apartment = $this->repository ->getById($id);
         $user = $this -> userRepository -> getById($apartment -> user_id);
@@ -73,14 +85,19 @@ class ApartmentsController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'addressLat' => 'required',
+            'addressLng' => 'required',
+            'price' => 'required|numeric'
         ]);
         $apartment = new Apartment();
         $apartment->name = $request->input('name');
         $apartment->description = $request->input('description');
-        $location = Geocoder::geocode($request->input('address'))->get()->first()->getCoordinates();
-        $apartment->longitude = $location->getLongitude();
-        $apartment->latitude = $location->getLatitude();
+        $apartment->longitude = $request->input('addressLng');
+        $apartment->latitude = $request->input('addressLat');
+        $apartment->address = $request->input('address');
+        $apartment->price = $request->input('price');
+        $apartment->user_id = Auth::id();
 
         $result = $this->repository->create($apartment);
         if($result){
@@ -92,24 +109,28 @@ class ApartmentsController extends Controller
     public function edit(int $id){
         $apartment = $this->repository->getById($id);
         if($apartment == null){
-            return response()->json(["error" => "404! Not Found"]);
+            return response()->json([], 404);
         }
-        $address = Geocoder::reverse($apartment->latitude, $apartment->longitude)->get()->first()->getFormattedAddress();
-        return view('apartments.edit', compact('apartment', 'id', 'address'));
+        return view('apartments.edit', compact('apartment', 'id'));
     }
 
     public function update(Request $request, $id){
         $validatedData = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'addressLat' => 'required',
+            'addressLng' => 'required',
+            'price' => 'required|numeric'
         ]);
         $apartment = new Apartment();
         $apartment->name = $request->get('name');
         $apartment->description = $request->get('description');
-        $location = Geocoder::geocode($request->input('address'))->get()->first()->getCoordinates();
-        $apartment->longitude = $location->getLongitude();
-        $apartment->latitude = $location->getLatitude();
+        $apartment->address= $request->input('address');
+        $apartment->longitude = $request->input('addressLng');
+        $apartment->latitude = $request->input('addressLat');
+        $apartment->price = $request->input('price');
+        $apartment->user_id = Auth::id();
         $result = $this->repository->update($apartment, $id);
         if($result){
             return back()->with('success', 'Apartment has been updated');
