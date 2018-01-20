@@ -4,8 +4,15 @@ $(document).ready(function(){
 
     var location = [];
 
-    var pickerDateFrom = new Pikaday({ field: document.getElementById('from') });
-    var pickerDateTo = new Pikaday({ field: document.getElementById('to') });
+    var pickerDateFrom = new Pikaday({
+        field: document.getElementById('from'),
+        minDate: new Date(),
+        onSelect: function(){
+            var date1 = pickerDateFrom.getDate();
+            pickerDateTo.setMinDate(date1);
+        }
+    });
+    var pickerDateTo = new Pikaday({ field: document.getElementById('to'), minDate: pickerDateFrom.getDate() });
 
     google.maps.event.addDomListener(destination, 'keydown', function(event) {
         if (event.keyCode === 13) {
