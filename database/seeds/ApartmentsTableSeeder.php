@@ -21,7 +21,8 @@ class ApartmentsTableSeeder extends Seeder
                 'longitude' => (string)$faker->longitude,
                 'latitude' => (string)$faker->latitude,
                 'price' => (float)$faker->numberBetween($min = 50, $max = 100),
-                'user_id' => $faker -> numberBetween($min = 1, $max = 7)
+                'user_id' => $faker -> numberBetween($min = 1, $max = 7),
+                'address' => $faker->address
             ]);
         }
     }

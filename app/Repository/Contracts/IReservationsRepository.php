@@ -18,4 +18,5 @@ interface IReservationsRepository
     public function getByUserId(int $user_id);
     public function getByUserIdAndReservationId(int $user_id,int  $reservation_id);
     public function getAvailableApartmentsForPeriod($id,$from, $to);
+    public function getUpcomingReservations($user_id);
 }

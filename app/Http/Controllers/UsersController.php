@@ -38,11 +38,17 @@ class UsersController extends Controller
 
         $apartments = $this -> repository->getByUserId($id);
         $reservations = $this-> reservationsRepository->getByUserId($id);
+        $upcoming = $this->reservationsRepository->getUpcomingReservations($id);
+//        $upcoming = $reservations->filter(function ($value, $key){
+//           return $value->from > date('Y-m-d');
+//        });
+
 
         return view('users.show')
             ->with('user', $user)
             ->with('reviews', $reviews)
             ->with('apartments', $apartments)
+            ->with('upcoming', $upcoming)
             ->with('reservations', $reservations);
     }
 }

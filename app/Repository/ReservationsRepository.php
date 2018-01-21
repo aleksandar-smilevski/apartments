@@ -11,6 +11,7 @@ namespace App\Repository;
 
 use App\Models\Reservation;
 use App\Repository\Contracts\IReservationsRepository;
+use Illuminate\Support\Facades\DB;
 
 class ReservationsRepository implements IReservationsRepository
 {
@@ -45,4 +46,14 @@ class ReservationsRepository implements IReservationsRepository
         return  Reservation::where('apartment_id',$id)->where("from","<=", $from)->select('apartment_id')->distinct()->get()->toArray();
     }
 
+    public function getUpcomingReservations($user_id)
+    {
+        //$reservations = Reservation::where('user_id', $user_id)->where('from', '>=', date('Y-m-d'))->get();
+        $reservations = DB::table('reservations')
+                ->join('apartments', 'apartments.id', '=', 'reservations.apartment_id')
+                ->where('reservations.user_id', $user_id)
+                ->where('reservations.from', '>=', date('Y-m-d'))
+                ->select('reservations.*', 'apartments.name as apartment_name')->get();
+        return $reservations;
+    }
 }

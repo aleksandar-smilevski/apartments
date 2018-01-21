@@ -35,6 +35,30 @@
 
         <div class="user-details">
             <div class="user-reviews">
+                <h4><b>Upcoming bookings ({{$upcoming->count()}})</b></h4>
+                <h5>bookings for {{$user->name}}</h5>
+                <hr>
+                @foreach($upcoming as $reservation)
+                    <div class="review-wrapper">
+                        <div class="review-body">
+                            <div class="review-person-image">
+                                <img src="../../img/app.jpg" alt="">
+                            </div>
+                            <div class="review-person-detail">
+                                    <h5><b>Apartment name:</b> <a   href="{{url('apartments/'. $reservation->apartment_id)}}">{{$reservation->apartment_name}}</a></h5>
+                                <h5>From: {{$reservation->from}} - To: {{$reservation->to}} </h5>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div>
+                        <p>Need directions to this apartment?</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="user-details">
+            <div class="user-reviews">
                 <h4><b>Reviews ({{$reviews->count()}})</b></h4>
                 <h5>Reviews from {{$user->name}}</h5>
                 <hr>
@@ -54,6 +78,5 @@
                 @endforeach
             </div>
         </div>
-
     </div>
 @endsection
