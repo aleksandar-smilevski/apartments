@@ -29,6 +29,12 @@
     height: 80px;
 }
 
+.element-wrapper-infowindow {
+    height: 350px;
+    width: 40%;
+    padding: 10px;
+}
+
 .element-price {
     width: 50px;
     height: 30px;

@@ -2,7 +2,7 @@ $(document).ready(function(){
     var destination = document.getElementById('destination');
     var autocomplete = new google.maps.places.Autocomplete(destination);
 
-    var location = [];
+    var location;
 
     var pickerDateFrom = new Pikaday({
         field: document.getElementById('from'),
@@ -20,18 +20,14 @@ $(document).ready(function(){
         }
     });
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
-
         var place = autocomplete.getPlace();
-
-        var lat = place.geometry.location.lat(),
-            lng = place.geometry.location.lng();
-
-        location.push(lat);
-        location.push(lng);
+        location = place.formatted_address;
     });
 
     $('#search').on('click', function(){
-        document.getElementById("destination").value = location;
+        if(location != undefined){
+            document.getElementById("destination").value = location;
+        }
     });
 
 });

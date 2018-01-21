@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Apartment;
+    use App\Models\Reservation;
 use App\Repository\Contracts\IApartmentsRepository;
 
 use App\Repository\Contracts\IReservationsRepository;
@@ -12,6 +13,7 @@ use App\Repository\Contracts\IUsersRepository;
 use Geocoder\Laravel\Facades\Geocoder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentsController extends Controller
 {
@@ -34,23 +36,48 @@ class ApartmentsController extends Controller
     }
 
     public function getByLocation(Request $request){
-        $allApartments = $this -> repository->getAll();
-        $apartments = [];
-        $availableApartmentsIds = [];
-        $users = [];
-        foreach($allApartments as $apartment){
-            $reservations= $this -> reservationsRepository -> getAvailableApartmentsForPeriod($apartment->id, $request->from , $request->to);
-            if(count($reservations) == 0){
-                array_push($availableApartmentsIds, $apartment->id);
-                array_push($users, $apartment->user_id);
-            }
+        $destination = $request->query('destination');
+        if($destination == null){
+            abort(500);
         }
-        $apartmentObjects = $this->repository -> getAvailableApartmentsFromIdsArray($availableApartmentsIds);
-        foreach($apartmentObjects as $apartment){
-            $apartment["username"] = $this->userRepository->getById($apartment->user_id)->name;
+        $location = Geocoder::geocode($destination)->get();
+        if(count($location) == 0){
+            abort(500);
         }
+        $location = $location->first()->toArray();
+        if($request->from != null and $request->to != null){
+            $time = strtotime($request->from);
+            $from = date('Y-m-d',$time);
+            $time = strtotime($request->to);
+            $to = date('Y-m-d',$time);
 
-        return view('apartments.list')->with('apartments', $apartmentObjects);
+            $availableApartments = $this->repository->getAvailableApartments($from, $to, $location["latitude"], $location["longitude"]);
+
+            $apartmentObjects = [];
+            foreach($availableApartments as $apartment){
+                $apartment['username'] = $this->userRepository->getById($apartment["user_id"])->name;
+                array_push($apartmentObjects, $apartment);
+            }
+            $data = array(
+                'apartments' => $apartmentObjects,
+                'location' => $location,
+                'dates' => array('from' => $from, 'to' => $to)
+            );
+            return view('apartments.list')->with($data);
+        }
+        else{
+            $apartments = $this->repository->getApartmentsInRadius($location["latitude"], $location["longitude"]);
+            $apartmentObjects = [];
+            foreach($apartments as $apartment){
+                $apartment['username'] = $this->userRepository->getById($apartment["user_id"])->name;
+                array_push($apartmentObjects, $apartment);
+            }
+            $data = array(
+                'apartments' => $apartmentObjects,
+                'location' => $location
+            );
+            return view('apartments.list')->with($data);
+        }
     }
 
     public function geocode(Request $request){
@@ -109,7 +136,7 @@ class ApartmentsController extends Controller
     public function edit(int $id){
         $apartment = $this->repository->getById($id);
         if($apartment == null){
-            return response()->json([], 404);
+            abort(404);
         }
         return view('apartments.edit', compact('apartment', 'id'));
     }
@@ -138,4 +165,9 @@ class ApartmentsController extends Controller
         return $result;
     }
 
+    public function compareDeepValue($val1, $val2)
+    {
+        $res = strcmp($val1["id"], $val2["id"]);
+        return $res;
+    }
 }

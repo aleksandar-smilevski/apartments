@@ -17,5 +17,7 @@ interface IApartmentsRepository
     public function delete(int $id);
     public function getByUserId(int $user_id);
     public function getAvailableApartmentsFromIdsArray($ids);
+    public function getApartmentsInRadius($lat, $lon, $radius = 10);
+    public function getAvailableApartments($from, $to, $lat, $lon, $radius = 10);
 
 }
