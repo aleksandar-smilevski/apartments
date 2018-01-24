@@ -37,7 +37,7 @@ class ApartmentsController extends Controller
 
     public function getByLocation(Request $request){
         $destination = $request->query('destination');
-        if($destination == null){
+        if($destination == null) {
             abort(500);
         }
         $location = Geocoder::geocode($destination)->get();
@@ -172,6 +172,17 @@ class ApartmentsController extends Controller
             return redirect('users/' . Auth::id())->with('success', 'Apartment has been updated');
         }
         return $result;
+    }
+
+    public function getDirections(Request $request){
+        if($request->apartment_id == null){
+            abort(500);
+        }
+        $apartment = $this->repository->getById($request->apartment_id);
+        if($apartment == null){
+            abort(404);
+        }
+        return view('apartments.directions', compact('apartment'));
     }
 
     public function compareDeepValue($val1, $val2)

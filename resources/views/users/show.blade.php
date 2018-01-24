@@ -64,12 +64,13 @@
                             <div class="review-person-detail">
                                     <h5><b>Apartment name:</b> <a   href="{{url('apartments/'. $reservation->apartment_id)}}">{{$reservation->apartment_name}}</a></h5>
                                 <h5>From: {{$reservation->from}} - To: {{$reservation->to}} </h5>
+                                <p><a href="/directions?apartment_id={{$reservation->apartment_id}}">Need directions?</a></p>
                             </div>
 
                         </div>
                     </div>
                     <div>
-                        <p>Need directions to this apartment?</p>
+
                     </div>
                 @endforeach
             </div>
