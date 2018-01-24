@@ -26,7 +26,7 @@
                 @foreach($apartments as $apartment)
                     <div class="apartment-wrapper">
                         <div class="apartment-title">
-                            <h5><b>Apartment name: </b> {{$apartment->name}}</h5>
+                            <h5><b>Apartment name:</b> <a href="{{url('apartments/'. $apartment->id )}}"> {{$apartment->name}}</a></h5>
                         </div>
                         <div class="apartment-image">
                             <img src="../../img/app.jpg" alt="">

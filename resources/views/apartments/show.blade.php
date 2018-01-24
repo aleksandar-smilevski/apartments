@@ -31,7 +31,7 @@
                 <h3>Reviews</h3>
                 @foreach($reviews as $review)
                     <div>
-                        <h4>User:  <a   href="{{url('users/'. $apartment->user_id)}}">{{$review -> username}}</a></h4>
+                        <h4>User:  <a   href="{{url('users/'. $review->user_id)}}">{{$review -> username}}</a></h4>
                         <h5>{{$review->review}}</h5>
                         <hr>
                     </div>
