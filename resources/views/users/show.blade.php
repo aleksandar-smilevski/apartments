@@ -33,16 +33,32 @@
 
                             @if($apartment->user_id == Auth::user()->id)
                                 <div>
-                                    <button class="linkButton"><a href="{{ url('apartments/edit/' . $apartment->id)}}"> Edit apartment</a></button>
-
-                                <form action="{{url ('apartments/delete/' . $apartment->id)}}" method="post">
-                                    {{csrf_field()}}
-                                    <button type="submit" class="linkButton"><a>Delete apartment</a></button>
-                                </form>
+                                    <a href="{{ url('apartments/edit/' . $apartment->id)}}"> Edit apartment</a>
+                                    <br>
+                                    <a href="" data-toggle="modal" data-target="#myModal">Delete apartment</a>
                                 </div>
                             @endif
                         </div>
 
+                    </div>
+                    <!-- Dialog box for deleting confirmation  -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="myModalLabel">Are you sure you want to delete '{{$apartment->name}}' ?</h3>
+                                </div>
+
+                                <form action="{{url ('apartments/delete/' . $apartment->id)}}" method="post">
+                                    <div class="modal-footer">
+                                        {{csrf_field()}}
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary" name="delete_dividend">Delete</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -99,12 +115,6 @@
     </div>
 @endsection
 
-<style>
-.linkButton {
-background: none;
-border: none;
-color: #0066ff;
-text-decoration: underline;
-cursor: pointer;
-}
-</style>
+
+
+

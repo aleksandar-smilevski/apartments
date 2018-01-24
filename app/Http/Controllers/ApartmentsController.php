@@ -128,7 +128,7 @@ class ApartmentsController extends Controller
 
         $result = $this->repository->create($apartment);
         if($result){
-            return back()->with('success', 'Apartment has been added');
+            return redirect('users/' . Auth::id())->with('success', 'Apartment has been added');
         }
         return $result;
     }
