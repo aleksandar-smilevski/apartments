@@ -32,8 +32,7 @@ Route::get('/apartments/{apartmentId}/reservations/{reservationId}',"Reservation
 
 Route::get('/users',"UsersController@index");
 Route::get('/users/{id}',"UsersController@show");
-
-
+Route::get('/directions', 'ApartmentsController@getDirections');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
