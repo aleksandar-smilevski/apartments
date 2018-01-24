@@ -141,6 +141,15 @@ class ApartmentsController extends Controller
         return view('apartments.edit', compact('apartment', 'id'));
     }
 
+    public function delete(int $id){
+        $apartment = $this->repository->getById($id);
+        if($apartment == null){
+            abort(404);
+        }
+        $this->repository->delete($id);
+        return redirect('users/' . Auth::id())->with('success','Apartment has been  deleted');
+    }
+
     public function update(Request $request, $id){
         $validatedData = $request->validate([
             'name' => 'required',
@@ -160,7 +169,7 @@ class ApartmentsController extends Controller
         $apartment->user_id = Auth::id();
         $result = $this->repository->update($apartment, $id);
         if($result){
-            return back()->with('success', 'Apartment has been updated');
+            return redirect('users/' . Auth::id())->with('success', 'Apartment has been updated');
         }
         return $result;
     }

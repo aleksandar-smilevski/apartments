@@ -18,6 +18,7 @@ Route::get('/apartments',"ApartmentsController@getByLocation");
 Route::get('/apartments/save', 'ApartmentsController@save')->middleware('auth');
 Route::get('/apartments/edit/{id}', 'ApartmentsController@edit')->middleware('auth');
 Route::post('/apartments/update/{id}', 'ApartmentsController@update')->middleware('auth');
+Route::post('/apartments/delete/{id}', 'ApartmentsController@delete')->middleware('auth');
 Route::get('/apartments/{id}',"ApartmentsController@show");
 Route::get('/geocode', "ApartmentsController@geocode");
 

@@ -3,10 +3,16 @@
 
 @section('content')
     <div class="wrapper">
+        @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <p>{{ \Session::get('success') }}</p>
+            </div><br />
+        @endif
         <div class="user-personal">
             <div class="user-picture">
                 <img src="../../img/demi.jpg" alt="">
             </div>
+
             <hr>
             <div class="user-name">
                 <h4>Personal information</h4>
@@ -24,6 +30,17 @@
                         </div>
                         <div class="apartment-image">
                             <img src="../../img/app.jpg" alt="">
+
+                            @if($apartment->user_id == Auth::user()->id)
+                                <div>
+                                    <button class="linkButton"><a href="{{ url('apartments/edit/' . $apartment->id)}}"> Edit apartment</a></button>
+
+                                <form action="{{url ('apartments/delete/' . $apartment->id)}}" method="post">
+                                    {{csrf_field()}}
+                                    <button type="submit" class="linkButton"><a>Delete apartment</a></button>
+                                </form>
+                                </div>
+                            @endif
                         </div>
 
                     </div>
@@ -80,3 +97,13 @@
         </div>
     </div>
 @endsection
+
+<style>
+.linkButton {
+background: none;
+border: none;
+color: #0066ff;
+text-decoration: underline;
+cursor: pointer;
+}
+</style>

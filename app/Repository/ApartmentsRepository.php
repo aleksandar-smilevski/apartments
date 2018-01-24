@@ -49,7 +49,11 @@ class ApartmentsRepository implements IApartmentsRepository
 
     public function delete(int $id)
     {
-        // TODO: Implement delete() method.
+        $apartment = Apartment::find($id);
+
+
+        $apartment->delete();
+
     }
     public function getAvailableApartmentsFromIdsArray($ids){
         return Apartment::whereIn('id',$ids)->get();

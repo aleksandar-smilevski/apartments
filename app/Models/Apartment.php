@@ -16,4 +16,11 @@ class Apartment extends Model
     public function reservations(){
         return $this->hasMany('App\Models\Reservation');
     }
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($user) {
+            $user->reservations()->delete();
+        });
+    }
 }
