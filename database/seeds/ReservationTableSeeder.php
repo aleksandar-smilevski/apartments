@@ -17,8 +17,8 @@ class ReservationTableSeeder extends Seeder
             $from = $faker->date;
             $to = $faker-> date;
             DB::table('reservations')->insert([
-                'user_id' => $faker->numberBetween($min = 1, $max = 7),
-                'apartment_id' => $faker->numberBetween($min = 1, $max = 8),
+                'user_id' => $faker->numberBetween($min = 1, $max = 5),
+                'apartment_id' => $faker->numberBetween($min = 3, $max = 10),
                 'from' =>$from,
                 'to' => $to
             ]);

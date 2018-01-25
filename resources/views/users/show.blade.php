@@ -30,7 +30,8 @@
                         </div>
                         <div class="apartment-image">
                             <img src="../../img/app.jpg" alt="">
-
+                            @guest
+                            @else
                             @if($apartment->user_id == Auth::user()->id)
                                 <div>
                                     <a href="{{ url('apartments/edit/' . $apartment->id)}}"> Edit apartment</a>
@@ -38,6 +39,7 @@
                                     <a href="" data-toggle="modal" data-target="#myModal">Delete apartment</a>
                                 </div>
                             @endif
+                            @endguest
                         </div>
 
                     </div>

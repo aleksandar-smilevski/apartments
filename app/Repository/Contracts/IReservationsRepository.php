@@ -9,10 +9,13 @@
 namespace App\Repository\Contracts;
 
 
+use App\Models\Reservation;
+
 interface IReservationsRepository
 {
     public function getAll();
     public function getById(int $id);
+    public function create(Reservation $reservation);
     public function getByApartmentId(int $apartment_id);
     public function getByApartmentIdAndReservationId(int $apartment_id, int $reservation_id);
     public function getByUserId(int $user_id);

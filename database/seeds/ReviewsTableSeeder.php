@@ -14,9 +14,9 @@ class ReviewsTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         for($i = 0; $i < 20; $i++){
             DB::table('reviews')->insert([
-                'user_id' => $faker->numberBetween($min = 1, $max = 7),
-                'apartment_id' => $faker->numberBetween($min = 1, $max = 8),
-                'review' => $faker->paragraph(),
+                'user_id' => $faker->numberBetween($min = 1, $max = 5),
+                'apartment_id' => $faker->numberBetween($min = 3, $max = 10),
+                'review' => $faker->paragraph(2, true),
 
             ]);
         }

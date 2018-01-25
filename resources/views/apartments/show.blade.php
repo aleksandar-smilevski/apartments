@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="element-reservation">
-                <a   href="{{url('apartments/'. $apartment->id . '/reservations')}}"> <button class="btn-primary btn">Make a reservation</button></a>
+                <a   href="{{url('apartments/'. $apartment->id . '/reservations/save')}}"> <button class="btn-primary btn">Make a reservation</button></a>
             </div>
             <br>
             <hr>

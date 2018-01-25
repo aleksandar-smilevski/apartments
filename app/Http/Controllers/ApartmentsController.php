@@ -109,6 +109,7 @@ class ApartmentsController extends Controller
     }
 
     public function create(Request $request){
+
         $validatedData = $request->validate([
             'name' => 'required',
             'description' => 'required',

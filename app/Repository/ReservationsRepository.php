@@ -56,4 +56,9 @@ class ReservationsRepository implements IReservationsRepository
                 ->select('reservations.*', 'apartments.name as apartment_name', 'apartments.latitude', 'apartments.longitude')->get();
         return $reservations;
     }
+
+    public function create(Reservation $reservation) {
+        $reservation = $reservation->save();
+        return $reservation;
+    }
 }

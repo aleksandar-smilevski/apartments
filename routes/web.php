@@ -23,12 +23,12 @@ Route::get('/apartments/{id}',"ApartmentsController@show");
 Route::get('/geocode', "ApartmentsController@geocode");
 
 Route::post('/apartments', "ApartmentsController@create")->name('create')->middleware('auth');
+Route::post('/reservations', "ReservationsController@create")->name('create')->middleware('auth');
 
 Route::get('/reservations',"ReservationsController@index");
-Route::get('/reservations/{id}',"ReservationsController@show");
+Route::get('/apartments/{apartmentId}/reservations/save',"ReservationsController@save")->middleware('auth');
 Route::get('/apartments/{apartmentId}/reservations',"ReservationsController@listAllForApartment");
 Route::get('/apartments/{apartmentId}/reservations/{reservationId}',"ReservationsController@showForApartment");
-
 
 
 Route::get('/users',"UsersController@index");

@@ -50,8 +50,6 @@ class ApartmentsRepository implements IApartmentsRepository
     public function delete(int $id)
     {
         $apartment = Apartment::find($id);
-
-
         $apartment->delete();
 
     }
