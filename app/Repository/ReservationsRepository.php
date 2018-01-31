@@ -10,6 +10,7 @@ namespace App\Repository;
 
 
 use App\Models\Reservation;
+use App\Models\User;
 use App\Repository\Contracts\IReservationsRepository;
 use Illuminate\Support\Facades\DB;
 
@@ -54,6 +55,17 @@ class ReservationsRepository implements IReservationsRepository
                 ->where('reservations.user_id', $user_id)
                 ->where('reservations.from', '>=', date('Y-m-d'))
                 ->select('reservations.*', 'apartments.name as apartment_name', 'apartments.latitude', 'apartments.longitude')->get();
+        return $reservations;
+    }
+
+    public function getUpcomingGuests($user_id)
+    {
+        $reservations = DB::table('reservations')
+            ->join('apartments', 'apartments.id', '=', 'reservations.apartment_id')
+            ->join('users', 'users.id', '=', 'reservations.user_id')
+            ->where('apartments.user_id', $user_id)
+            ->where('reservations.from', '>=', date('Y-m-d'))
+            ->select('reservations.*', 'apartments.name as apartment_name', 'apartments.latitude', 'apartments.longitude', 'users.name')->get();
         return $reservations;
     }
 

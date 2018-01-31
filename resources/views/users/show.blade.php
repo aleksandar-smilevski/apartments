@@ -81,10 +81,34 @@
                             </div>
                             <div class="review-person-detail">
                                     <h5><b>Apartment name:</b> <a   href="{{url('apartments/'. $reservation->apartment_id)}}">{{$reservation->apartment_name}}</a></h5>
-                                <h5>From: {{$reservation->from}} - To: {{$reservation->to}} </h5>
+                                <h5><b>From:</b> {{$reservation->from}} - <b>To:</b> {{$reservation->to}} </h5>
                                 <p><a href="/directions?apartment_id={{$reservation->apartment_id}}">Need directions?</a></p>
                             </div>
 
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="user-details">
+            <div class="user-reviews">
+                <h4><b>Upcoming guests ({{$upcomingGuests->count()}})</b></h4>
+                <hr>
+                @foreach($upcomingGuests as $reservation)
+                    <div class="review-wrapper">
+                        <div class="review-body">
+                            <div class="review-person-image">
+                                <img src="../../img/app.jpg" alt="">
+                            </div>
+                            <div class="review-person-detail">
+                                <h5><b>Apartment name:</b> <a   href="{{url('apartments/'. $reservation->apartment_id)}}">{{$reservation->apartment_name}}</a></h5>
+                                <h5><b>From:</b> {{$reservation->from}} - <b>To:</b> {{$reservation->to}} </h5>
+                                <h5><b>Guest:</b> {{$reservation->name}}</h5>
+                            </div>
                         </div>
                     </div>
                     <div>

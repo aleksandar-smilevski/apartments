@@ -12,7 +12,12 @@ $(document).ready(function(){
             pickerDateTo.setMinDate(date1);
         }
     });
-    var pickerDateTo = new Pikaday({ field: document.getElementById('to'), minDate: pickerDateFrom.getDate() });
+    var pickerDateTo = new Pikaday({ field: document.getElementById('to'), minDate: new Date(),
+        onSelect: function () {
+            var date1 = pickerDateTo.getDate();
+            pickerDateFrom.setMaxDate(date1);
+        }
+    });
 
     google.maps.event.addDomListener(destination, 'keydown', function(event) {
         if (event.keyCode === 13) {
