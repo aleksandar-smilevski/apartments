@@ -99,7 +99,6 @@
                 },
                 format: 'YYYY-MM-DD',
                 disableDayFn: function (date) {
-                    console.log(reservedDays);
                     for(var i=0;i<reservedDays.length;i++){
 
                         if(formatDate(reservedDays[i]) == formatDate(date))
@@ -116,7 +115,6 @@
                 },
                 format: 'YYYY-MM-DD',
                 disableDayFn: function (date) {
-                    console.log(reservedDays);
                     for(var i=0;i<reservedDays.length;i++){
 
                         if(formatDate(reservedDays[i]) == formatDate(date))
@@ -130,7 +128,6 @@
                 var from = pickerDateFrom.getDate();
 
                 var to = pickerDateTo.getDate();
-                console.log(from);
                 daysBetween = (to - from)/1000/60/60/24;
                 var pricePerNight = $('#pricePerNight').val();
                 var price = pricePerNight * daysBetween;
@@ -139,7 +136,6 @@
 
             }
             function formatDate(date) {
-                console.log('date'+ date);
                 var datestring = date.getFullYear()+ "-" + (date.getMonth()+1) +"-"+ date.getDate() ;
                 return datestring;
             }
@@ -150,22 +146,19 @@
 
                 $('#from').val( formatDate(from1));
                 $('#to').val(formatDate(to1));
-
-                console.log();
             });
 
             function restrictDatePickers(){
-                        @foreach ($reservations as $reservation)
-                var from = "{{$reservation['from']}}";
-                var to = "{{$reservation['to']}}";
-                from = new Date(from.valueOf());
-                to = new Date(to.valueOf());
-                var dates = getDates(from, to);
-                for(var j=0;j<dates.length;j++){
-                    reservedDays.push(dates[j]);
-                }
+                @foreach ($reservations as $reservation)
+                    var from = "{{$reservation['from']}}";
+                    var to = "{{$reservation['to']}}";
+                    from = new Date(from.valueOf());
+                    to = new Date(to.valueOf());
+                    var dates = getDates(from, to);
+                    for(var j=0;j<dates.length;j++){
+                        reservedDays.push(dates[j]);
+                    }
                 @endforeach
-                console.log(dates);
                 function getDates(startDate, endDate) {
 
                     var dates = [],
