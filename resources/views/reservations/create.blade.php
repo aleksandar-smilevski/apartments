@@ -55,8 +55,6 @@
                                 </div>
                             </div>
 
-
-
                             <div class="form-group">
                                 <label for="pricePerNight" class="col-md-4 control-label">Price per night in $</label>
 
@@ -97,6 +95,7 @@
                     var date1 = pickerDateFrom.getDate();
                     pickerDateTo.setMinDate(date1);
                     document.getElementById('to').value = "";
+                    document.getElementById('price').value = "";
                 },
                 format: 'YYYY-MM-DD',
                 disableDayFn: function (date) {
@@ -135,8 +134,6 @@
                 daysBetween = (to - from)/1000/60/60/24;
                 var pricePerNight = $('#pricePerNight').val();
                 var price = pricePerNight * daysBetween;
-
-
                 $('#price').val((daysBetween * pricePerNight));
 
 
@@ -167,10 +164,6 @@
                 for(var j=0;j<dates.length;j++){
                     reservedDays.push(dates[j]);
                 }
-
-
-
-
                 @endforeach
                 console.log(dates);
                 function getDates(startDate, endDate) {

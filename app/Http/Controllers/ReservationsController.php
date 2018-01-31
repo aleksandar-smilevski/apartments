@@ -29,7 +29,9 @@ class ReservationsController extends Controller
 
         $validatedData = $request->validate([
             'from' => 'required',
-            'to' => 'required'
+            'to' => 'required',
+            'description' => 'required',
+            'price' => 'required'
         ]);
 
         $reservation = new Reservation();

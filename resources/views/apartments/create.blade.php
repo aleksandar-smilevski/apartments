@@ -22,7 +22,7 @@
                     <div class="panel-heading">Create Apartment</div>
 
                     <div class="panel-body">
-                        <form id="form" class="form-horizontal" method="POST" action="{{ route('create') }}">
+                        <form id="form" class="form-horizontal" method="POST" action="{{ url('/apartments') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

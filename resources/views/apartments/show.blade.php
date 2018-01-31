@@ -22,9 +22,17 @@
                     </p>
                 </div>
             </div>
+            @guest
+                <div class="element-reservation">
+                    <a   href="{{url('apartments/'. $apartment->id . '/reservations/save')}}"> <button class="btn-primary btn">Make a reservation</button></a>
+                </div>
+            @else
+            @if($apartment->user_id != Auth::user()->id)
             <div class="element-reservation">
                 <a   href="{{url('apartments/'. $apartment->id . '/reservations/save')}}"> <button class="btn-primary btn">Make a reservation</button></a>
             </div>
+            @endif
+            @endguest
             <br>
             <hr>
             <div class="apartment-reviews">
